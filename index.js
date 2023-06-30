@@ -3,6 +3,7 @@ let express = require('express');
 let app = express();
 require('dotenv').config();
 var mysql      = require('mysql');
+const { ifError } = require('assert');
 var connection = mysql.createConnection({
   host     : process.env.DB_HOST,
   user     : process.env.DB_USER,
@@ -13,19 +14,16 @@ var connection = mysql.createConnection({
 let port = process.env.PORT || 6969;
 
 app.get("/", (req, res) => {
-    connection.connect();
+    res.status(200);
+    res.sendFile(path.join(__dirname, '/views/index.html'));
+});
+app.get("/projects", (req, res) => {
     connection.query('SELECT * FROM projects', function (error, results, fields) {
         res.status(200);
         res.send(results);
-        // if (error) throw error;
-    
-    });
-    connection.end();
-    // res.status(200);
-    // res.sendFile(path.join(__dirname, '/views/index.html'));
+        if (error) throw error;
+    }); 
 });
-
-// app.use("/")
 
 app.listen(
     port, 
