@@ -2,14 +2,8 @@ const path = require('path');
 let express = require('express');
 let app = express();
 require('dotenv').config();
-var mysql      = require('mysql');
-const { ifError } = require('assert');
-var connection = mysql.createConnection({
-  host     : process.env.DB_HOST,
-  user     : process.env.DB_USER,
-  password : process.env.DB_PASS,
-  database : process.env.DB_NAME
-});
+
+let projectRoutes = require('./routes')
 
 let port = process.env.PORT || 6969;
 
@@ -17,13 +11,8 @@ app.get("/", (req, res) => {
     res.status(200);
     res.sendFile(path.join(__dirname, '/views/index.html'));
 });
-app.get("/projects", (req, res) => {
-    connection.query('SELECT * FROM projects', function (error, results, fields) {
-        res.status(200);
-        res.send(results);
-        if (error) throw error;
-    }); 
-});
+
+app.use('/projects', projectRoutes)
 
 app.listen(
     port, 
