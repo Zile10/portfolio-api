@@ -1,18 +1,24 @@
-const {path, app, bodyParser, dotenv} = require('./imports')
+// Imports
+const {path, express, bodyParser, dotenv} = require('./imports');
+const {projectsRoutes} = require('./routers');
+
+// File Setup/Config
+const app = express()
 dotenv.config();
-let port = process.env.PORT || 6969;
+const port = process.env.PORT || 6969;
 
-let projectRoutes = require('./routes')
-
+// Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/projects", projectRoutes)
+// Routing
 app.get("/", (req, res) => {
     res.status(200);
-    res.sendFile(path.join(__dirname, '/views/index.html'));
+    res.sendFile(path.join(__dirname, '/views/index.html')); // Send HTML File to Root Requests
 });
+app.use("/projects", projectsRoutes) // Set '/projects' to use the projectRoutes file/module
 
+// Server
 app.listen(
     port,
     () => {

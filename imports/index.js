@@ -1,9 +1,10 @@
+// Commonly Used Imports
 module.exports = {
     path: require('path'),
-    ls: require('ls'),
     express: require('express'),
     app: require('express')(),
-    bodyParser: require('bodyParser'),
+    bodyParser: require('body-parser'),
+    mysql: require('mysql'),
     dotenv: require('dotenv'),
-    connection: require('../db_config')
+    connection: require('../config')
 }

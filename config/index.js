@@ -1,8 +1,8 @@
-// Importing mysql & dotenv package
+// Imports: (MySQL & dotenv)
 const mysql = require('mysql');
-require('dotenv').config()
+require('dotenv').config();
 
-// Setting up database connection using enviroment variables
+// Setting Up Database Connection Using Environment Variables
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user:  process.env.DB_USER,
@@ -10,5 +10,6 @@ const connection = mysql.createConnection({
   database:  process.env.DB_NAME,
   multipleStatements: true
 })
-// Exporting connection to database
+
+// Exporting Connection to Database
 module.exports = connection;
