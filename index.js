@@ -10,6 +10,14 @@ const port = process.env.PORT || 6969;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+// Allowing frontend access to backend
+app.use((req, res, next)=> {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header("Access-Control-Allow-Credentials", "true")
+    res.header("Access-Control-Allow-Methods", "*")
+    res.header("Access-Control-Allow-Headers", "*")
+    next();
+  });
 
 // Routing
 app.get("/", (req, res) => {
