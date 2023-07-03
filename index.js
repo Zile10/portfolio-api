@@ -1,10 +1,8 @@
-const path = require('path');
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
-let projectRoutes = require('./routes/index')
-require('dotenv').config();
+const {path, app, bodyParser, dotenv} = require('./imports')
+dotenv.config();
 let port = process.env.PORT || 6969;
+
+let projectRoutes = require('./routes')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
