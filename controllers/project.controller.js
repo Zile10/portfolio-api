@@ -5,7 +5,7 @@ module.exports = {
     try {
       projectModel.getProjects(req, res)
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.status(400).send(error);
     }
   },
@@ -13,7 +13,7 @@ module.exports = {
     try {
       projectModel.createProject(req, res)
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.status(400).send(error);
     }
   },
@@ -21,7 +21,7 @@ module.exports = {
     try {
       projectModel.updateProject(req, res)
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.status(400).send(error);
     }
   },
@@ -29,7 +29,7 @@ module.exports = {
     try {
       projectModel.deleteProject(req, res)
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.status(400).send(error);
     }
   },
